@@ -2,24 +2,49 @@ package com.agendamento_consulta.services;
 
 import com.agendamento_consulta.dtos.PacienteRequestDTO;
 import com.agendamento_consulta.dtos.PacienteResponseDTO;
+import com.agendamento_consulta.mapper.PacienteMapper;
 import com.agendamento_consulta.model.Paciente;
 import com.agendamento_consulta.repository.PacienteRepository;
-import lombok.AllArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.modelmapper.ModelMapper;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class PacienteService {
 
     private final PacienteRepository pacienteRepository;
-    private final ModelMapper mapper;
+    private final PacienteMapper pacienteMapper;
 
-    public PacienteResponseDTO salvar(PacienteRequestDTO dto){
-        Paciente paciente = mapper.map(dto, Paciente.class);
+    public PacienteResponseDTO salvarPaciente(PacienteRequestDTO dto){
+        Paciente paciente = pacienteMapper.toEntity(dto);
         Paciente salvo = pacienteRepository.save(paciente);
-        return mapper.map(salvo, PacienteResponseDTO.class);
+        return pacienteMapper.toResponseDto(salvo);
+    }
+
+    public List<Paciente> listarPacientes(){
+        return pacienteRepository.findAll();
+    }
+
+    public Optional<Paciente> porcurarPorId(Long id){
+        return pacienteRepository.findById(id);
+    }
+
+    public PacienteResponseDTO atualizarPaciente(Long id, PacienteRequestDTO dto) {
+
+        Paciente atualizado = pacienteRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
+
+        pacienteMapper.atualizarPacienteDoDto(dto, atualizado);
+
+        Paciente salvo = pacienteRepository.save(atualizado);
+
+        return pacienteMapper.toResponseDto(salvo);
+    }
+
+    public void deletarPaciente(Long id){
+        pacienteRepository.deleteById(id);
     }
 }

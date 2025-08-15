@@ -16,7 +16,6 @@ public class Medico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Getter
-    @Setter
     private Long id;
 
     @Column(nullable = false)
