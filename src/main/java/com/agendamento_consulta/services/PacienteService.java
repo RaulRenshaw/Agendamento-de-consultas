@@ -21,6 +21,7 @@ public class PacienteService {
     public PacienteResponseDTO salvarPaciente(PacienteRequestDTO dto){
         Paciente paciente = pacienteMapper.toEntity(dto);
         Paciente salvo = pacienteRepository.save(paciente);
+
         return pacienteMapper.toResponseDto(salvo);
     }
 
@@ -33,7 +34,6 @@ public class PacienteService {
     }
 
     public PacienteResponseDTO atualizarPaciente(Long id, PacienteRequestDTO dto) {
-
         Paciente atualizado = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
