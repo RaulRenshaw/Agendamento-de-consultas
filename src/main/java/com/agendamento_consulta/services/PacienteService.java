@@ -25,15 +25,13 @@ public class PacienteService {
 
         return pacienteMapper.toResponseDto(salvo);
     }
-
     public List<PacienteResponseDTO> listarPacientes(){
         return pacienteMapper.toDtoList(pacienteRepository.findAll());
     }
-
-    public Optional<Paciente> porcurarPorId(Long id){
-        return pacienteRepository.findById(id);
+    public Optional<PacienteResponseDTO> porcurarPorId(Long id){
+        return pacienteRepository.findById(id)
+                .map(pacienteMapper::toResponseDto);
     }
-
     public PacienteResponseDTO atualizarPaciente(Long id, PacienteRequestDTO dto) {
         Paciente atualizado = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
@@ -44,7 +42,6 @@ public class PacienteService {
 
         return pacienteMapper.toResponseDto(salvo);
     }
-
     public boolean deletarPaciente(Long id){
        return pacienteRepository.findById(id)
                .map(paciente -> {

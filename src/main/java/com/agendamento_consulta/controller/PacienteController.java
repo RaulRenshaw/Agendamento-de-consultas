@@ -15,29 +15,24 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/paciente")
 public class PacienteController {
-
     @Autowired
     private PacienteService pacienteService;
 
     @PostMapping
     public ResponseEntity<PacienteResponseDTO> criar(@RequestBody PacienteRequestDTO paciente){
-        System.out.println("Recebido: " + paciente);
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(pacienteService.salvarPaciente(paciente));
     }
-
     @GetMapping
     public ResponseEntity<List<PacienteResponseDTO>> listar(){
         return ResponseEntity.ok(pacienteService.listarPacientes());
     }
-
     @GetMapping("/{id}")
-    public ResponseEntity<Paciente> procurarPorId(@PathVariable Long id){
+    public ResponseEntity<PacienteResponseDTO> procurarPorId(@PathVariable Long id){
         return pacienteService.porcurarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deletarPaciente(@PathVariable Long id){
         if (pacienteService.deletarPaciente(id)){

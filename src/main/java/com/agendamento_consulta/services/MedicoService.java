@@ -25,15 +25,13 @@ public class MedicoService {
 
         return medicoMapper.toResponseDto(salvo);
     }
-
-    public List<Medico> listarMedicos(){
-        return medicoRepository.findAll();
+    public List<MedicoResponseDTO> listarMedicos(){
+        return medicoMapper.toDtoList(medicoRepository.findAll());
     }
-
-    public Optional<Medico> procurarPorId(Long id){
-        return medicoRepository.findById(id);
+    public Optional<MedicoResponseDTO> procurarPorId(Long id){
+        return medicoRepository.findById(id)
+                .map(medicoMapper::toResponseDto);
     }
-
     public MedicoResponseDTO atualizarMedico(Long id, MedicoRequestDTO dto){
         Medico atualizado = medicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Medico não encontrado"));
@@ -44,8 +42,12 @@ public class MedicoService {
 
         return medicoMapper.toResponseDto(salvo);
     }
-
-    public void deletar(Long id){
-        medicoRepository.deleteById(id);
+    public boolean deletar(Long id){
+        return medicoRepository.findById(id)
+                .map(paciente -> {
+                    medicoRepository.delete(paciente);
+                    return true;
+                })
+                .orElse(false);
     }
 }
