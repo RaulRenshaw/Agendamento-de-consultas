@@ -5,7 +5,6 @@ import com.agendamento_consulta.dtos.PacienteResponseDTO;
 import com.agendamento_consulta.mapper.PacienteMapper;
 import com.agendamento_consulta.model.Paciente;
 import com.agendamento_consulta.repository.PacienteRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -46,7 +45,12 @@ public class PacienteService {
         return pacienteMapper.toResponseDto(salvo);
     }
 
-    public void deletarPaciente(Long id){
-        pacienteRepository.deleteById(id);
+    public boolean deletarPaciente(Long id){
+       return pacienteRepository.findById(id)
+               .map(paciente -> {
+                   pacienteRepository.delete(paciente);
+                   return true;
+               })
+               .orElse(false);
     }
 }
