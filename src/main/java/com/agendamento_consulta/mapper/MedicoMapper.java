@@ -2,10 +2,7 @@ package com.agendamento_consulta.mapper;
 
 import com.agendamento_consulta.dtos.MedicoRequestDTO;
 import com.agendamento_consulta.dtos.MedicoResponseDTO;
-import com.agendamento_consulta.dtos.PacienteRequestDTO;
-import com.agendamento_consulta.dtos.PacienteResponseDTO;
 import com.agendamento_consulta.model.Medico;
-import com.agendamento_consulta.model.Paciente;
 import org.mapstruct.BeanMapping;
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingTarget;
@@ -24,5 +21,5 @@ public interface MedicoMapper {
 
     //Atualiza apenas campos não nulos
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    void atualizarMedicoDoDto(MedicoRequestDTO dto, @MappingTarget Medico entity);
+    void atualizarMedicoDto(MedicoRequestDTO dto, @MappingTarget Medico entity);
 }

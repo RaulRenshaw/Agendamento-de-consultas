@@ -37,7 +37,7 @@ public class PacienteService {
         Paciente atualizado = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
-        pacienteMapper.atualizarPacienteDoDto(dto, atualizado);
+        pacienteMapper.atualizarPacienteDto(dto, atualizado);
 
         Paciente salvo = pacienteRepository.save(atualizado);
 

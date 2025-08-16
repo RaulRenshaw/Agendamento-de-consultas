@@ -19,7 +19,6 @@ public class MedicoService {
     private final MedicoMapper medicoMapper;
 
     public MedicoResponseDTO salvarMedico(MedicoRequestDTO dto){
-
         Medico medico = medicoMapper.toEntity(dto);
         Medico salvo = medicoRepository.save(medico);
 
@@ -38,11 +37,11 @@ public class MedicoService {
         Medico atualizado = medicoRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Medico não encontrado"));
 
-        medicoMapper.atualizarMedicoDoDto(dto, atualizado);
+        medicoMapper.atualizarMedicoDto(dto, atualizado);
 
         Medico salvo = medicoRepository.save(atualizado);
 
-        return medicoMapper.toResponseDto(atualizado);
+        return medicoMapper.toResponseDto(salvo);
     }
 
     public void deletar(Long id){
