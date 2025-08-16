@@ -19,7 +19,7 @@ public class Paciente {
     private Long id;
 
     @NotBlank
-    private String name;
+    private String nome;
 
     @Pattern(regexp = "\\d{11}", message = "o cpf deve conter exatamente 11 digitos")
     @Column(unique = true, nullable = false, length = 11)
@@ -32,7 +32,5 @@ public class Paciente {
     @Pattern(regexp = "\\+?\\d{10,15}", message = "Telefone invalido")
     @Column(nullable = false, length = 15)
     private String telefone;
-
-
 
 }

@@ -6,17 +6,19 @@ import com.agendamento_consulta.mapper.PacienteMapper;
 import com.agendamento_consulta.model.Paciente;
 import com.agendamento_consulta.repository.PacienteRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
 @Service
-@RequiredArgsConstructor
 public class PacienteService {
 
-    private final PacienteRepository pacienteRepository;
-    private final PacienteMapper pacienteMapper;
+    @Autowired
+    private PacienteRepository pacienteRepository;
+    @Autowired
+    private PacienteMapper pacienteMapper;
 
     public PacienteResponseDTO salvarPaciente(PacienteRequestDTO dto){
         Paciente paciente = pacienteMapper.toEntity(dto);

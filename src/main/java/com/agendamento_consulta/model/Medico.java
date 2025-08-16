@@ -24,7 +24,7 @@ public class Medico {
     private Long id;
 
     @Column(nullable = false)
-    private String name;
+    private String nome;
 
     @Column(unique = true, nullable = false, length = 10)
     private String crm;

@@ -6,6 +6,7 @@ import com.agendamento_consulta.mapper.ConsultaMapper;
 import com.agendamento_consulta.model.Consulta;
 import com.agendamento_consulta.repository.ConsultaRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,8 +16,10 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class ConsultaService {
 
-    private final ConsultaRepository consultaRepository;
-    private final ConsultaMapper consultaMapper;
+    @Autowired
+    private ConsultaRepository consultaRepository;
+    @Autowired
+    private ConsultaMapper consultaMapper;
 
     public ConsultaResponseDTO salvarConsulta(ConsultaRequestDTO dto){
         Consulta consulta = consultaMapper.toEntity(dto);

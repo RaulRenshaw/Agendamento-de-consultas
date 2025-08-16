@@ -3,18 +3,18 @@ package com.agendamento_consulta.dtos;
 import jakarta.persistence.Column;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class MedicoRequestDTO {
 
     @Column(nullable = false)
     @Getter
     @Setter
     @NotNull
-    private String name;
+    private String nome;
 
     @Column(unique = true, nullable = false)
     @Getter

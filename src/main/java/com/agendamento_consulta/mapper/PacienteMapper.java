@@ -4,11 +4,9 @@ import com.agendamento_consulta.dtos.PacienteRequestDTO;
 import com.agendamento_consulta.dtos.PacienteResponseDTO;
 import com.agendamento_consulta.model.Paciente;
 import org.mapstruct.*;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 
-@Component
 @Mapper(componentModel = "spring")
 public interface PacienteMapper {
 
@@ -18,6 +16,7 @@ public interface PacienteMapper {
     //Converte uma entidade paciente em um DTO de resposta
     PacienteResponseDTO toResponseDto(Paciente paciente);
 
+    //Converte uma lista de pacientes em uma lista de pacientes respostas
     List<PacienteResponseDTO> toDtoList (List<Paciente> pacientes);
 
     //Atualiza apenas campos não nulos
