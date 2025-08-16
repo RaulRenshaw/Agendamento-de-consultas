@@ -25,8 +25,8 @@ public class PacienteService {
         return pacienteMapper.toResponseDto(salvo);
     }
 
-    public List<Paciente> listarPacientes(){
-        return pacienteRepository.findAll();
+    public List<PacienteResponseDTO> listarPacientes(){
+        return pacienteMapper.toDtoList(pacienteRepository.findAll());
     }
 
     public Optional<Paciente> porcurarPorId(Long id){

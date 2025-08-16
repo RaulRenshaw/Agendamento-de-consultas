@@ -5,15 +5,15 @@ import com.agendamento_consulta.dtos.PacienteResponseDTO;
 import com.agendamento_consulta.model.Paciente;
 import com.agendamento_consulta.services.PacienteService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+import java.util.List;
+
+@RestController
 @RequestMapping("/paciente")
 @RequiredArgsConstructor
 public class PacienteController {
@@ -27,5 +27,8 @@ public class PacienteController {
     }
 
     @GetMapping
+    public ResponseEntity<List<PacienteResponseDTO>> listar(){
+        return ResponseEntity.ok(pacienteService.listarPacientes());
+    }
 
 }

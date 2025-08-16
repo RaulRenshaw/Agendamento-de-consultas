@@ -2,7 +2,6 @@ package com.agendamento_consulta.services;
 
 import com.agendamento_consulta.dtos.ConsultaRequestDTO;
 import com.agendamento_consulta.dtos.ConsultaResponseDTO;
-import com.agendamento_consulta.dtos.MedicoRequestDTO;
 import com.agendamento_consulta.mapper.ConsultaMapper;
 import com.agendamento_consulta.model.Consulta;
 import com.agendamento_consulta.repository.ConsultaRepository;
