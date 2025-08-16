@@ -9,25 +9,24 @@ import lombok.Setter;
 import java.time.LocalDateTime;
 
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class Consulta {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Getter
     private Long id;
 
     @ManyToOne
-    @Getter
-    @Setter
+    @JoinColumn(name = "medico_id", nullable = false)
     private Medico medico;
 
     @ManyToOne
-    @Getter
-    @Setter
+    @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    @Getter
+    @Column(name = "data_hora", nullable = false)
     private LocalDateTime localDateTime;
 }

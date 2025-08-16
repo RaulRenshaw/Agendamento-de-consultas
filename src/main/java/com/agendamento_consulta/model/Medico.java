@@ -1,16 +1,21 @@
 package com.agendamento_consulta.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Entity
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
+@Table(name = "medico")
 public class Medico {
 
     @Id
@@ -19,27 +24,22 @@ public class Medico {
     private Long id;
 
     @Column(nullable = false)
-    @Getter
-    @Setter
     private String name;
 
-    @Column(unique = true, nullable = false)
-    @Getter
-    @Setter
+    @Column(unique = true, nullable = false, length = 10)
     private String crm;
 
-
     @Column(nullable = false)
-    @Getter
-    @Setter
     private String specialty;
 
+    @Column(nullable = false, length = 11)
     @Pattern(regexp = "\\d{11}", message = "O número deve conter exatamente 11 números")
-    @Getter
-    @Setter
     private String telefone;
 
-    @Getter
-    @Setter
+    @Column(nullable = false)
+    @Email(message = "E-mail inválido")
     private String email;
+
+    @OneToMany(mappedBy = "medico")
+    private List<Consulta> consultas;
 }
