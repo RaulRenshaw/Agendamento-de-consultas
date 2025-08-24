@@ -2,7 +2,6 @@ package com.agendamento_consulta.services;
 
 import com.agendamento_consulta.dtos.PacienteRequestDTO;
 import com.agendamento_consulta.dtos.PacienteResponseDTO;
-import com.agendamento_consulta.mapper.PacienteMapper;
 import com.agendamento_consulta.model.Paciente;
 import com.agendamento_consulta.repository.PacienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,31 +15,36 @@ public class PacienteService {
 
     @Autowired
     private PacienteRepository pacienteRepository;
-    @Autowired
-    private PacienteMapper pacienteMapper;
 
-    public PacienteResponseDTO salvarPaciente(PacienteRequestDTO dto){
-        Paciente paciente = pacienteMapper.toEntity(dto);
-        Paciente salvo = pacienteRepository.save(paciente);
+    public PacienteResponseDTO salvarPaciente(PacienteRequestDTO dto) {
 
-        return pacienteMapper.toResponseDto(salvo);
+        Paciente paciente = new Paciente();
+        paciente.setNome(dto.getNome());
+        paciente.setCpf(dto.getCpf());
+        paciente.setEmail(dto.getEmail());
+        paciente.setTelefone(dto.getTelefone());
+
+        return PacienteResponseDTO.fromEntity(pacienteRepository.save(paciente));
+
     }
     public List<PacienteResponseDTO> listarPacientes(){
-        return pacienteMapper.toDtoList(pacienteRepository.findAll());
+        return PacienteResponseDTO.fromEntityList(pacienteRepository.findAll());
     }
-    public Optional<PacienteResponseDTO> porcurarPorId(Long id){
+    public Optional<PacienteResponseDTO> procurarPorId(Long id){
         return pacienteRepository.findById(id)
-                .map(pacienteMapper::toResponseDto);
+                .map(PacienteResponseDTO::fromEntity);
     }
     public PacienteResponseDTO atualizarPaciente(Long id, PacienteRequestDTO dto) {
-        Paciente atualizado = pacienteRepository.findById(id)
+        Paciente paciente = pacienteRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Paciente não encontrado"));
 
-        pacienteMapper.atualizarPacienteDto(dto, atualizado);
+        if (dto.getNome() != null) paciente.setNome(dto.getNome());
+        if (dto.getCpf() != null) paciente.setCpf(dto.getCpf());
+        if (dto.getEmail() != null) paciente.setEmail(dto.getEmail());
+        if (dto.getTelefone() != null) paciente.setTelefone(dto.getTelefone());
 
-        Paciente salvo = pacienteRepository.save(atualizado);
-
-        return pacienteMapper.toResponseDto(salvo);
+        Paciente atualizado = pacienteRepository.save(paciente);
+        return PacienteResponseDTO.fromEntity(atualizado);
     }
     public boolean deletarPaciente(Long id){
        return pacienteRepository.findById(id)

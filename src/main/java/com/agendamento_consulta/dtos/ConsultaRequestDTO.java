@@ -10,22 +10,19 @@ import java.time.LocalDateTime;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Getter
+@Setter
 public class ConsultaRequestDTO {
 
     @ManyToOne
     @NotNull
-    @Getter
-    @Setter
     private Long medicoId;
 
     @ManyToOne
     @NotNull
-    @Getter
-    @Setter
     private Long pacienteId;
 
-    @Getter
     @NotNull
     @Future(message = "A data e hora devem estar no futuro")
-    private LocalDateTime localDateTime;
+    private LocalDateTime dataHora;
 }

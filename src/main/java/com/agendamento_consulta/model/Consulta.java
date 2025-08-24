@@ -1,10 +1,7 @@
 package com.agendamento_consulta.model;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.time.LocalDateTime;
 
@@ -13,6 +10,7 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
 public class Consulta {
 
     @Id
@@ -28,5 +26,5 @@ public class Consulta {
     private Paciente paciente;
 
     @Column(name = "data_hora", nullable = false)
-    private LocalDateTime localDateTime;
+    private LocalDateTime dataHora;
 }
