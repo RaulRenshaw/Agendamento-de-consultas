@@ -25,6 +25,6 @@ public class Consulta {
     @JoinColumn(name = "paciente_id", nullable = false)
     private Paciente paciente;
 
-    @Column(name = "data_hora", nullable = false)
-    private LocalDateTime dataHora;
+    @OneToOne
+    private Horario horario;
 }
