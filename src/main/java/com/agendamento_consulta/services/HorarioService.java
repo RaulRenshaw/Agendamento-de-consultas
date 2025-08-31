@@ -17,6 +17,13 @@ public class HorarioService {
     @Autowired
     private HorarioRepository horarioRepository;
     public HorarioResponseDTO salvar(HorarioRequestDTO dto){
+        Optional<Horario> existe = horarioRepository.findByDataAndHoraInicioAndHoraFim(
+                dto.getData(), dto.getHoraInicio(), dto.getHoraFim());
+
+        if (existe.isPresent()){
+            throw new IllegalArgumentException("Já existe um horario igual");
+        }
+
         Horario horario = new Horario();
         horario.setData(dto.getData());
         horario.setHoraInicio(dto.getHoraInicio());

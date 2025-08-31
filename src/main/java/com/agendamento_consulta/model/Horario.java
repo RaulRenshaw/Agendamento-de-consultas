@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Getter
@@ -17,9 +18,9 @@ public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private LocalDateTime data;
-    private LocalDateTime horaInicio;
-    private LocalDateTime horaFim;
+    private LocalDate data;
+    private LocalTime horaInicio;
+    private LocalTime horaFim;
     @Enumerated(EnumType.STRING)
     private StatusHorario status;
     @ManyToOne

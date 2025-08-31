@@ -1,9 +1,7 @@
 package com.agendamento_consulta.dtos;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Data
@@ -11,12 +9,9 @@ import java.time.LocalTime;
 @NoArgsConstructor
 @Getter
 @Setter
-public class HorarioRequestDTO {
-
-    @NotNull
-    private LocalDate data;
-    @NotNull
+public class DisponibilidadeDTO {
+    private String diasSemana;
     private LocalTime horaInicio;
-    @NotNull
     private LocalTime horaFim;
+    private int duracao;
 }
