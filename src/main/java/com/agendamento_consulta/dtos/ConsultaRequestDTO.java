@@ -1,6 +1,7 @@
 package com.agendamento_consulta.dtos;
 
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import jakarta.validation.constraints.Future;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
@@ -23,6 +24,6 @@ public class ConsultaRequestDTO {
     private Long pacienteId;
 
     @NotNull
-    @Future(message = "A data e hora devem estar no futuro")
-    private LocalDateTime dataHora;
+    @OneToOne
+    private Long horarioId;
 }

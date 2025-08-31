@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -25,5 +26,10 @@ public class HorarioResponseDTO {
                 horario.getHoraFim(),
                 horario.getStatus()
         );
+    }
+    public static List<HorarioResponseDTO> fromEntityList(List<Horario> horario){
+        return horario.stream()
+                .map(HorarioResponseDTO::fromEntity)
+                .toList();
     }
 }
