@@ -26,4 +26,5 @@ public class ConsultaRequestDTO {
     @NotNull
     @OneToOne
     private Long horarioId;
+
 }

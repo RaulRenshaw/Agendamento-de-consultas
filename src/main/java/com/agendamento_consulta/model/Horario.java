@@ -22,9 +22,12 @@ public class Horario {
     private LocalTime horaInicio;
     private LocalTime horaFim;
     @Enumerated(EnumType.STRING)
-    private StatusHorario status;
+    private StatusHorario status = StatusHorario.LIVRE;
     @ManyToOne
     private Medico medico;
+    @OneToOne
+    private Consulta consulta;
+
 
     public enum StatusHorario{
         LIVRE,OCUPADO

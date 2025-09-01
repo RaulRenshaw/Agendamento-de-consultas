@@ -27,4 +27,7 @@ public class Consulta {
 
     @OneToOne
     private Horario horario;
+
+    @Column(name = "data_hora", nullable = false)
+    private LocalDateTime dataHora;
 }

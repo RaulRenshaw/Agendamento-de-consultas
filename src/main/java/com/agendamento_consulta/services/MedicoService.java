@@ -1,6 +1,7 @@
 package com.agendamento_consulta.services;
 
-import com.agendamento_consulta.dtos.DisponibilidadeDTO;
+import com.agendamento_consulta.dtos.DisponibilidadeRequestDTO;
+import com.agendamento_consulta.dtos.HorarioResponseDTO;
 import com.agendamento_consulta.dtos.MedicoRequestDTO;
 import com.agendamento_consulta.dtos.MedicoResponseDTO;
 import com.agendamento_consulta.model.Horario;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -61,24 +63,4 @@ public class MedicoService {
                 .orElse(false);
     }
 
-    public void gerarHorarios(DisponibilidadeDTO dto, LocalDate inicio, LocalDate fim){
-        for (LocalDate data = inicio; !data.isAfter(fim); data.plusDays(1)){
-            if (data.getDayOfWeek().toString().equals(dto.getDiasSemana())){
-                LocalTime hora = dto.getHoraInicio();
-                while (hora.plusMinutes(dto.getDuracao()).isBefore(dto.getHoraFim().plusSeconds(1))){
-                    Horario horario = new Horario();
-                    horario.setData(data);
-                    horario.setHoraInicio(hora);
-                    horario.setHoraFim(hora.plusMinutes(dto.getDuracao()));
-
-                    Optional<Horario> existe = horarioRepository.findByDataAndHoraInicioAndHoraFim(
-                            horario.getData(), horario.getHoraInicio(), horario.getHoraFim());
-                    if (existe.isEmpty()){
-                        horarioRepository.save(horario);
-                    }
-                    hora = hora.plusMinutes(dto.getDuracao());
-                }
-            }
-        }
-    }
 }

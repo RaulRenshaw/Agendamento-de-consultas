@@ -47,7 +47,9 @@ public class ConsultaService {
         consulta.setPaciente(paciente);
         consulta.setMedico(medico);
         consulta.setHorario(horario);
+        consulta.setDataHora(horario.getData().atTime(horario.getHoraInicio()));
 
+        horario.setConsulta(consulta); // <-- adiciona isso
         horario.setStatus(Horario.StatusHorario.OCUPADO);
 
         Consulta salva = consultaRepository.save(consulta);

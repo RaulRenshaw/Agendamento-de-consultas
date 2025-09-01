@@ -1,11 +1,11 @@
 package com.agendamento_consulta.dtos;
 
 import com.agendamento_consulta.model.Horario;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 
 @Data
@@ -14,10 +14,11 @@ import java.util.List;
 public class HorarioResponseDTO {
 
     private Long id;
-    private LocalDateTime data;
-    private LocalDateTime horaInicio;
-    private LocalDateTime horaFim;
+    private LocalDate data;
+    private LocalTime horaInicio;
+    private LocalTime horaFim;
     private Horario.StatusHorario status;
+
     public static HorarioResponseDTO fromEntity(Horario horario){
         return new HorarioResponseDTO(
                 horario.getId(),

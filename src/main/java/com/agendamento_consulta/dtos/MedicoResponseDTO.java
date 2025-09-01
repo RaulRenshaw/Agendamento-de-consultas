@@ -1,12 +1,9 @@
 package com.agendamento_consulta.dtos;
 
 import com.agendamento_consulta.model.Medico;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,6 +14,8 @@ public class MedicoResponseDTO {
     private String crm;
     private String specialty;
     private String telefone;
+
+
     public static MedicoResponseDTO fromEntity(Medico medico){
         return new MedicoResponseDTO(
                 medico.getId(),
